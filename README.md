@@ -14,12 +14,12 @@ And then execute:
 
 Mount the app in your config/routes.rb file:
 
- mount DeployStatus::Server, at: "deploy_status"
+    mount DeployStatus::Server, at: "deploy_status"
 
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/deploy_status/fork )
+1. Fork it ( http://github.com/mwq/deploy_status/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
