@@ -3,8 +3,11 @@ namespace :deploy do
   task :status do |t|
     require 'open-uri'
     system("git fetch -q")
+    protocol = fetch(:protocol, 'http')
+    port = fetch(:port, 80)
     on roles(:app) do |host|
-      open("http://#{host}:80/deploy_status", ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE) do |f|
+      addr = "#{protocol}://#{host}:#{port}/deploy_status"
+      open(addr, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE) do |f|
         status = f.read.gsub("\n","")
         branch = fetch(:branch, 'HEAD')
         remote_commit = status.split('|').first.split[1]
