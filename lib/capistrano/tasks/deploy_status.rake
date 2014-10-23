@@ -11,8 +11,12 @@ namespace :deploy do
         status = f.read.gsub("\n","")
         branch = fetch(:branch, 'HEAD')
         remote_commit = status.split('|').first.split[1]
-        local_commit = %x(git rev-parse --short origin/#{branch.to_s.shellescape})
-        puts "#{host} runs: #{remote_commit}, should run: #{branch}@#{local_commit}"
+        local_hash = %x(git rev-parse --short origin/#{branch.to_s.shellescape}).strip
+        local_commit = "#{branch}@#{local_hash}"
+        puts "#{host} runs: #{remote_commit}, should run: #{local_commit}"
+        if remote_commit != local_commit
+          fail "Wrong commit is running, you should probably restart unicorn"
+        end
       end
     end
   end
