@@ -16,6 +16,12 @@ Mount the app in your config/routes.rb file:
 
     mount DeployStatus::Server, at: "deploy_status"
 
+Add to config/deploy.rm:
+    
+    after 'deploy:finished', 'deploy:set_current_version'
+    
+To print out the curren version, invove the status task:
+    invoke 'deploy:status'
 
 ## Contributing
 
