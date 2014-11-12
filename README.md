@@ -21,6 +21,7 @@ Add to config/deploy.rm:
     after 'deploy:finished', 'deploy:set_current_version'
     
 To print out the curren version, invove the status task:
+   
     invoke 'deploy:status'
 
 ## Contributing
