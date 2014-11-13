@@ -5,8 +5,9 @@ namespace :deploy do
     system("git fetch -q")
     protocol = fetch(:protocol, 'http')
     port = fetch(:port, 80)
+    deploy_status_path = fetch(:deploy_status_path, "deploy_status")
     on roles(:app) do |host|
-      addr = "#{protocol}://#{host}:#{port}/deploy_status"
+      addr = "#{protocol}://#{host}:#{port}/#{deploy_status_path}"
       open(addr, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE) do |f|
         status = f.read.gsub("\n","")
         branch = fetch(:branch, 'HEAD')
